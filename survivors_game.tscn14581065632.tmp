@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://swcb8q32cvqi"]
+
+[ext_resource type="PackedScene" uid="uid://c1sx7bic4uhdj" path="res://player.tscn" id="1_3cish"]
+[ext_resource type="Script" uid="uid://c1bfau31nfqio" path="res://survivors_game.gd" id="1_qqaft"]
+[ext_resource type="PackedScene" uid="uid://dq3r015sr1uql" path="res://pine_tree.tscn" id="2_y3pti"]
+
+[sub_resource type="Curve2D" id="Curve2D_l26od"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -82, -93, 0, 0, 0, 0, 2001, -109, 0, 0, 0, 0, 2003, 1169, 0, 0, 0, 0, -85, 1171, 0, 0, 0, 0, -82, -93)
+}
+point_count = 5
+
+[node name="Game" type="Node2D" unique_id=1307062922]
+y_sort_enabled = true
+script = ExtResource("1_qqaft")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=393826373]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=866012259]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.9471994, 0.9471994, 0.9471994, 1)
+
+[node name="Player" parent="." unique_id=160481880 instance=ExtResource("1_3cish")]
+position = Vector2(963, 526)
+
+[node name="Path2D" type="Path2D" parent="Player" unique_id=1730399861]
+position = Vector2(-963, -526)
+curve = SubResource("Curve2D_l26od")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D" unique_id=1352470037]
+unique_name_in_owner = true
+position = Vector2(-82, -93)
+rotation = -0.007681078
+
+[node name="PineTree" parent="." unique_id=145447735 instance=ExtResource("2_y3pti")]
+position = Vector2(232, 218)
+
+[node name="PineTree2" parent="." unique_id=1236426618 instance=ExtResource("2_y3pti")]
+position = Vector2(435, 790)
+
+[node name="PineTree3" parent="." unique_id=1985654798 instance=ExtResource("2_y3pti")]
+position = Vector2(313, 248)
+
+[node name="PineTree4" parent="." unique_id=1328325339 instance=ExtResource("2_y3pti")]
+position = Vector2(1486, 166)
+
+[node name="PineTree5" parent="." unique_id=866328086 instance=ExtResource("2_y3pti")]
+position = Vector2(1696, 595)
+
+[node name="PineTree6" parent="." unique_id=1349019989 instance=ExtResource("2_y3pti")]
+position = Vector2(898, 899)
+
+[node name="PineTree7" parent="." unique_id=1526213400 instance=ExtResource("2_y3pti")]
+position = Vector2(761, 366)
+
+[node name="PineTree8" parent="." unique_id=931814114 instance=ExtResource("2_y3pti")]
+position = Vector2(1301, 957)
+
+[node name="PineTree10" parent="." unique_id=192915899 instance=ExtResource("2_y3pti")]
+position = Vector2(1385, 934)
+
+[node name="PineTree9" parent="." unique_id=916770647 instance=ExtResource("2_y3pti")]
+position = Vector2(1348, 996)
+
+[node name="MobSpawnTimer" type="Timer" parent="." unique_id=1994968480]
+wait_time = 0.3
+autostart = true
+
+[node name="GameOver" type="CanvasLayer" parent="." unique_id=677979946]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="GameOver" unique_id=789706960]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5137255)
+
+[node name="Label" type="Label" parent="GameOver/ColorRect" unique_id=1975778409]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -11.5
+offset_right = 46.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 156
+text = "GAME OVER"
+uppercase = true
+
+[node name="Start" type="Button" parent="GameOver" unique_id=1378936092]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.46343154
+anchor_top = 1.7243806
+anchor_right = 0.8276723
+anchor_bottom = 1.8864177
+offset_left = -265.78857
+offset_top = -1123.3312
+offset_right = -265.78857
+offset_bottom = -1123.3312
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 120
+text = "Restart"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
+[connection signal="timeout" from="MobSpawnTimer" to="." method="_on_mob_spawn_timer_timeout"]
+[connection signal="pressed" from="GameOver/Start" to="." method="_on_start_pressed"]
+[connection signal="toggled" from="GameOver/Start" to="." method="_on_start_toggled"]
