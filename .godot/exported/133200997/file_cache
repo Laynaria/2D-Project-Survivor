@@ -5,9 +5,9 @@ res://assets/pistol/impact/impact.tscn::12c0234c1b7ebc6feadb920017bb68c7::178308
 res://assets/pistol/muzzle_flash/muzzle_flash.tscn::ef1265f263395dd3fcc014c03f6de4a3::1783088016::res://.godot/exported/133200997/export-90a89615d4b1390c9541183b7556a426-muzzle_flash.scn
 res://assets/smoke_explosion/smoke_explosion.tscn::7290007e97b5fd7622617309e6747634::1783088017::res://.godot/exported/133200997/export-1646972bfee10a95fd0bf6f30e3bc375-smoke_explosion.scn
 res://assets/default_bus_layout.tres::f79fcacca07a2d471d5d1918fc173cbc::1783087690::res://.godot/exported/133200997/export-d01cc4ddf1d732095fecfb44d2dc8d65-default_bus_layout.res
-res://player.tscn::3615778e8821336ba9ac9ae6e528778b::1783102205::res://.godot/exported/133200997/export-36a25e342948d0ceacc500772b5412b3-player.scn
+res://player.tscn::3615778e8821336ba9ac9ae6e528778b::1783180088::res://.godot/exported/133200997/export-36a25e342948d0ceacc500772b5412b3-player.scn
 res://pine_tree.tscn::d81a17b838db494d65168d4d0ec05793::1783097099::res://.godot/exported/133200997/export-bf993d67081309dd66a6fbfd837d4c3c-pine_tree.scn
 res://mob.tscn::a43f61d60c5d23e084ee165332f7732b::1783096856::res://.godot/exported/133200997/export-5b94865898bd9b5cb44e426bf42f6f48-mob.scn
-res://gun.tscn::90721a003d57b261149866df85c6618d::1783099111::res://.godot/exported/133200997/export-b254bef953a17239ecd110db09321b87-gun.scn
+res://gun.tscn::0c27b75421f195d49903b6dad763475f::1783180625::res://.godot/exported/133200997/export-b254bef953a17239ecd110db09321b87-gun.scn
 res://bullet.tscn::347c41d3ad9f48f5b89e9bdc97b6fac1::1783097497::res://.godot/exported/133200997/export-6350fccf6e14d2f0c891730ee1d2c6cd-bullet.scn
-res://survivors_game.tscn::35e94496d0b9a7598724455520d1fe51::1783108532::res://.godot/exported/133200997/export-aec2b102d84bb89f68fff5ad31f206fa-survivors_game.scn
+res://survivors_game.tscn::d12f5a41d3abda91b46e71501c0ceeff::1783181634::res://.godot/exported/133200997/export-aec2b102d84bb89f68fff5ad31f206fa-survivors_game.scn

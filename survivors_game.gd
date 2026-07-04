@@ -1,13 +1,16 @@
 extends Node2D
 
-const MAX_MOBS = 50
+var max_mobs = 50
 var mob_count = 0
+
+var lvl = 1
+var xp = 0
 
 func _ready() -> void:
 	%GameOver.hide()
 
 func spawn_mob():
-	if mob_count >= MAX_MOBS:
+	if mob_count >= max_mobs:
 		return
 	
 	var new_mob = preload("res://mob.tscn").instantiate()
@@ -20,6 +23,15 @@ func spawn_mob():
 
 func _on_mob_tree_exited():
 	mob_count -= 1
+	xp += 5
+	if xp >= 100 and lvl < 99:
+		xp = 0
+		lvl += 1
+		%LvlLabel.text = "Lv. %s" % lvl
+		$Player.level_up()
+		$MobSpawnTimer.wait_time *= 0.8
+		max_mobs += 1
+	%ExpBar.value = xp
 
 func _on_mob_spawn_timer_timeout() -> void:
 	spawn_mob()
@@ -35,3 +47,4 @@ func restart():
 	get_tree().paused = false
 	%GameOver.hide()
 	get_tree().reload_current_scene()
+	

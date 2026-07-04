@@ -24,3 +24,9 @@ func _physics_process(delta: float) -> void:
 		%ProgressBar.value = health
 		if health <= 0.0:
 			health_depleted.emit()
+
+func level_up():
+	var new_gun = preload("res://gun.tscn").instantiate()
+	# %PathFollow2D.progress_ratio = randf()
+	# new_gun.global_position =  %PathFollow2D.global_position
+	add_child(new_gun)
