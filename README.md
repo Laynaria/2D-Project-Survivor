@@ -14,3 +14,5 @@ Another Godot Tutorial from GDscript, for a survivor type game, which I try to i
 - Level up increase max number of monster that can be spawned
 
 - Added Music and DeathSound
+- Improved Targeting of Guns, to aim at different targets, at high spawn rate it seems to not feel the same, but still working
+- Added Slime Kill Counter

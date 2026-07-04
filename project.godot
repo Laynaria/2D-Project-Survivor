@@ -97,6 +97,10 @@ project/assembly_name="Getting started with Godot 4"
 
 enabled=PackedStringArray()
 
+[global_group]
+
+Gun=""
+
 [input]
 
 ui_accept={

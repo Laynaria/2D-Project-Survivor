@@ -2,6 +2,7 @@ extends Node2D
 
 var max_mobs = 50
 var mob_count = 0
+var killed_count = 0
 
 var lvl = 1
 var xp = 0
@@ -23,7 +24,10 @@ func spawn_mob():
 
 func _on_mob_tree_exited():
 	mob_count -= 1
+	killed_count += 1
 	xp += 5
+	var slime_or_slimes = "slime" if killed_count <= 1 else "slimes"
+	%KilledLabel.text = "%s %s killed" % [killed_count, slime_or_slimes]
 	if xp >= 100 and lvl < 99:
 		xp = 0
 		lvl += 1

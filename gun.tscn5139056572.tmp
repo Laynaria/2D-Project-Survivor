@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ptbx7"]
 radius = 618.634
 
-[node name="Gun" type="Area2D" unique_id=68863186 groups=["Gun"]]
+[node name="Gun" type="Area2D" unique_id=68863186]
 collision_layer = 4
 collision_mask = 6
 script = ExtResource("1_dk5gl")
