@@ -2,7 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://c1sx7bic4uhdj" path="res://player.tscn" id="1_3cish"]
 [ext_resource type="Script" uid="uid://c1bfau31nfqio" path="res://survivors_game.gd" id="1_qqaft"]
+[ext_resource type="AudioStream" uid="uid://b0m8yp6tc1snc" path="res://assets/House In a Forest Loop.ogg" id="2_qqaft"]
 [ext_resource type="PackedScene" uid="uid://dq3r015sr1uql" path="res://pine_tree.tscn" id="2_y3pti"]
+[ext_resource type="AudioStream" uid="uid://bqxvtkceieecj" path="res://assets/gameover.wav" id="3_7jj1j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l26od"]
 bg_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
@@ -65,6 +67,16 @@ offset_bottom = 58.0
 theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
 theme_override_font_sizes/font_size = 32
 text = "Lv. 1"
+
+[node name="Music" type="AudioStreamPlayer" parent="HUD" unique_id=179047760]
+stream = ExtResource("2_qqaft")
+autoplay = true
+parameters/looping = true
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="HUD" unique_id=1328294725]
+process_mode = 3
+stream = ExtResource("3_7jj1j")
+volume_db = 10.0
 
 [node name="Player" parent="." unique_id=160481880 instance=ExtResource("1_3cish")]
 position = Vector2(963, 526)

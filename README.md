@@ -12,3 +12,5 @@ Another Godot Tutorial from GDscript, for a survivor type game, which I try to i
 - Level up add an additional gun, they can overlap though
 - Level up decrease monster spawn rate
 - Level up increase max number of monster that can be spawned
+
+- Added Music and DeathSound

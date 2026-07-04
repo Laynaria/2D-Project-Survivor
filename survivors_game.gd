@@ -41,6 +41,7 @@ func _on_start_pressed() -> void:
 
 func _on_player_health_depleted() -> void:
 	%GameOver.show()
+	$HUD/DeathSound.play()
 	get_tree().paused = true
 
 func restart():
