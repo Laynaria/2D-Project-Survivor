@@ -36,6 +36,17 @@ events = [SubResource("InputEventAction_edxvn")]
 y_sort_enabled = true
 script = ExtResource("1_qqaft")
 
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=179047760]
+stream = ExtResource("2_qqaft")
+autoplay = true
+parameters/looping = true
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1328294725]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("3_7jj1j")
+volume_db = 10.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=393826373]
 layer = -1
 
@@ -78,16 +89,6 @@ offset_bottom = 105.0
 theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
 theme_override_font_sizes/font_size = 32
 text = "0 slime killed"
-
-[node name="Music" type="AudioStreamPlayer" parent="HUD" unique_id=179047760]
-stream = ExtResource("2_qqaft")
-autoplay = true
-parameters/looping = true
-
-[node name="DeathSound" type="AudioStreamPlayer" parent="HUD" unique_id=1328294725]
-process_mode = 3
-stream = ExtResource("3_7jj1j")
-volume_db = 10.0
 
 [node name="Player" parent="." unique_id=160481880 instance=ExtResource("1_3cish")]
 position = Vector2(963, 526)
