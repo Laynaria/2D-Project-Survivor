@@ -22,7 +22,7 @@ corner_radius_bottom_left = 8
 
 [sub_resource type="Curve2D" id="Curve2D_l26od"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -82, -93, 0, 0, 0, 0, 2134.6245, -95.48566, 0, 0, 0, 0, 2131.7837, 1259.8085, 0, 0, 0, 0, -83.106125, 1262.7043, 0, 0, 0, 0, -82, -93)
+"points": PackedVector2Array(0, 0, 0, 0, -82, -93, 0, 0, 0, 0, 2001, -109, 0, 0, 0, 0, 2003, 1169, 0, 0, 0, 0, -85, 1171, 0, 0, 0, 0, -82, -93)
 }
 point_count = 5
 
@@ -38,6 +38,7 @@ script = ExtResource("1_qqaft")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=179047760]
 stream = ExtResource("2_qqaft")
+autoplay = true
 parameters/looping = true
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1328294725]
@@ -93,14 +94,13 @@ text = "0 slime killed"
 position = Vector2(963, 526)
 
 [node name="Path2D" type="Path2D" parent="Player" unique_id=1730399861]
-position = Vector2(-1075.237, -568.0828)
-scale = Vector2(1.0560344, 1.0359375)
+position = Vector2(-963, -526)
 curve = SubResource("Curve2D_l26od")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D" unique_id=1352470037]
 unique_name_in_owner = true
 position = Vector2(-82, -93)
-rotation = -0.0011213698
+rotation = -0.007681078
 
 [node name="PineTree" parent="." unique_id=145447735 instance=ExtResource("2_y3pti")]
 position = Vector2(232, 218)
@@ -199,70 +199,7 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 28
 text = "You can press enter or start button to restart"
 
-[node name="Pause" type="CanvasLayer" parent="." unique_id=1078022363]
-unique_name_in_owner = true
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="Pause" unique_id=768737895]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.5137255)
-
-[node name="Label" type="Label" parent="Pause/ColorRect" unique_id=485952523]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.0
-offset_top = -11.5
-offset_right = 46.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 156
-text = "PAUSE"
-uppercase = true
-
-[node name="Unpause" type="Button" parent="Pause" unique_id=638843148]
-process_mode = 3
-anchors_preset = -1
-anchor_left = 0.46343154
-anchor_top = 1.7243806
-anchor_right = 0.8276723
-anchor_bottom = 1.8864177
-offset_left = -265.78857
-offset_top = -1123.3312
-offset_right = -265.78857
-offset_bottom = -1123.3312
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 120
-shortcut = SubResource("Shortcut_7jj1j")
-text = "Continue"
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="Pause" unique_id=1595495630]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -304.0
-offset_top = -152.0
-offset_right = 305.0
-offset_bottom = -113.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 28
-text = "You can press enter or start button to continue"
-
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
 [connection signal="timeout" from="MobSpawnTimer" to="." method="_on_mob_spawn_timer_timeout"]
 [connection signal="pressed" from="GameOver/Start" to="." method="_on_start_pressed"]
 [connection signal="toggled" from="GameOver/Start" to="." method="_on_start_toggled"]
-[connection signal="pressed" from="Pause/Unpause" to="." method="_on_unpause_pressed"]

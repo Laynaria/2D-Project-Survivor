@@ -13,7 +13,10 @@ var lvl = 1
 var xp = 0
 
 func _ready() -> void:
+	$Music.play()
 	%GameOver.hide()
+	for n in range(10) :
+		spawn_tree()
 
 func _physics_process(_delta: float) -> void:
 	if $Player.position != previous_position :
@@ -21,15 +24,19 @@ func _physics_process(_delta: float) -> void:
 		previous_position = $Player.position
 	
 	if walk_distance == 10:
-		#if tree_count >= MAX_TREE:
-		#	return
 		spawn_tree()
 		tree_count += 1
 		walk_distance = 0
 		
 		var trees = get_tree().get_nodes_in_group("Tree")
+		var previous_tree = trees[0] if trees.size() > 1 else null
+		
+		for tree in range(trees.size()):
+			var current_tree = trees[tree]
+			if $Player.position.distance_to(previous_tree.position) < $Player.position.distance_to(current_tree.position):
+				previous_tree = current_tree
 		if trees and tree_count > MAX_TREE:
-			trees.front().queue_free()
+			previous_tree.queue_free()
 			tree_count -= 1
 
 func spawn_mob():
@@ -81,3 +88,14 @@ func spawn_tree():
 	new_tree.global_position =  %PathFollow2D.global_position
 	add_child(new_tree)
 	
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept") and get_tree().paused == false:
+		get_tree().paused = true
+		%Pause.show()
+
+func unpause():
+	get_tree().paused = false
+	%Pause.hide()
+
+func _on_unpause_pressed() -> void:
+	unpause()
