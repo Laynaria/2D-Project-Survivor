@@ -3,6 +3,9 @@ extends CharacterBody2D
 signal health_depleted
 
 var health = 100.0
+var atk = 1
+var agi = 1
+var vit = 1
 
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -24,9 +27,27 @@ func _physics_process(delta: float) -> void:
 		%ProgressBar.value = health
 		if health <= 0.0:
 			health_depleted.emit()
+			
+	%Timer.wait_time = (1.0 - (float(vit) / 198))
 
 func level_up():
 	var new_gun = preload("res://gun.tscn").instantiate()
 	# %PathFollow2D.progress_ratio = randf()
 	# new_gun.global_position =  %PathFollow2D.global_position
 	add_child(new_gun)
+
+func _on_timer_timeout() -> void:
+	if health < 100:
+		health += 1
+		if health > 100:
+			health = 100
+		%ProgressBar.value = health
+
+func add_atk() -> void:
+	atk += 1
+
+func add_agi() -> void:
+	agi += 1
+	
+func add_vit() -> void:
+	vit += 1

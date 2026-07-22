@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://b0m8yp6tc1snc" path="res://assets/House In a Forest Loop.ogg" id="2_qqaft"]
 [ext_resource type="PackedScene" uid="uid://dq3r015sr1uql" path="res://pine_tree.tscn" id="2_y3pti"]
 [ext_resource type="AudioStream" uid="uid://bqxvtkceieecj" path="res://assets/gameover.wav" id="3_7jj1j"]
+[ext_resource type="PackedScene" uid="uid://c4epiu5brqfek" path="res://level_up_card.tscn" id="6_edxvn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l26od"]
 bg_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
@@ -37,7 +38,9 @@ y_sort_enabled = true
 script = ExtResource("1_qqaft")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=179047760]
+process_mode = 3
 stream = ExtResource("2_qqaft")
+autoplay = true
 parameters/looping = true
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1328294725]
@@ -55,6 +58,19 @@ offset_bottom = 1080.0
 color = Color(0.9471994, 0.9471994, 0.9471994, 1)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=826242962]
+
+[node name="TimeLabel" type="Label" parent="HUD" unique_id=964586045]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.5
+offset_right = 61.5
+offset_bottom = 67.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "00:00"
 
 [node name="ExpBar" type="ProgressBar" parent="HUD" unique_id=733427274]
 unique_name_in_owner = true
@@ -88,6 +104,36 @@ offset_bottom = 105.0
 theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
 theme_override_font_sizes/font_size = 32
 text = "0 slime killed"
+
+[node name="AtkLabel" type="Label" parent="HUD" unique_id=1669581681]
+offset_left = 17.0
+offset_top = 105.0
+offset_right = 143.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 Atk"
+
+[node name="AgiLabel" type="Label" parent="HUD" unique_id=1129864566]
+offset_left = 17.0
+offset_top = 150.0
+offset_right = 143.0
+offset_bottom = 195.0
+theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 Agi"
+
+[node name="VitLabel" type="Label" parent="HUD" unique_id=960962599]
+offset_left = 17.0
+offset_top = 198.0
+offset_right = 143.0
+offset_bottom = 243.0
+theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 Vit"
+
+[node name="Timer" type="Timer" parent="HUD" unique_id=1822123409]
+autostart = true
 
 [node name="Player" parent="." unique_id=160481880 instance=ExtResource("1_3cish")]
 position = Vector2(963, 526)
@@ -138,7 +184,6 @@ autostart = true
 
 [node name="GameOver" type="CanvasLayer" parent="." unique_id=677979946]
 unique_name_in_owner = true
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="GameOver" unique_id=789706960]
 anchors_preset = 15
@@ -148,7 +193,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5137255)
 
-[node name="Label" type="Label" parent="GameOver/ColorRect" unique_id=1975778409]
+[node name="GameOverLabel" type="Label" parent="GameOver/ColorRect" unique_id=1975778409]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -261,8 +307,68 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 28
 text = "You can press enter or start button to continue"
 
+[node name="LevelUp" type="CanvasLayer" parent="." unique_id=335557350]
+unique_name_in_owner = true
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="LevelUp" unique_id=1290973993]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5137255)
+
+[node name="ColorRect2" type="ColorRect" parent="LevelUp" unique_id=372717527]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.5
+offset_top = -116.0
+offset_right = 111.5
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="LevelUp" unique_id=1337633970]
+offset_left = 890.0
+offset_top = 366.0
+offset_right = 1041.0
+offset_bottom = 411.0
+theme_override_font_sizes/font_size = 32
+text = "LEVEL UP!"
+
+[node name="LevelUpCard" parent="LevelUp" unique_id=1179941357 instance=ExtResource("6_edxvn")]
+top_level = true
+light_mask = 0
+visibility_layer = 524288
+position = Vector2(864, 424)
+
+[node name="StatPoints" type="Label" parent="LevelUp" unique_id=706958607]
+offset_left = 795.0
+offset_top = 681.0
+offset_right = 1139.0
+offset_bottom = 726.0
+theme_override_font_sizes/font_size = 32
+text = "Allocate your points: 0"
+
+[node name="ValidatePoints" type="Button" parent="LevelUp" unique_id=1188190645]
+process_mode = 3
+offset_left = 833.0
+offset_top = 739.0
+offset_right = 1090.0
+offset_bottom = 830.0
+theme_override_font_sizes/font_size = 60
+text = "Validate"
+
+[node name="Victory" type="CanvasLayer" parent="." unique_id=1991066588]
+
+[connection signal="timeout" from="HUD/Timer" to="." method="_on_timer_timeout"]
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
 [connection signal="timeout" from="MobSpawnTimer" to="." method="_on_mob_spawn_timer_timeout"]
 [connection signal="pressed" from="GameOver/Start" to="." method="_on_start_pressed"]
 [connection signal="toggled" from="GameOver/Start" to="." method="_on_start_toggled"]
 [connection signal="pressed" from="Pause/Unpause" to="." method="_on_unpause_pressed"]
+[connection signal="pressed" from="LevelUp/ValidatePoints" to="LevelUp/LevelUpCard" method="_on_validate_points_pressed"]

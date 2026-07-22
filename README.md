@@ -29,3 +29,17 @@ Another Godot Tutorial from GDscript, for a survivor type game, which I try to i
 - Improved Tree and Mob Spawning, to always spawn outside of screen
 - Improved Tree Despawning, by calculating which tree is really the farest from player
 - Added a Pause and Unpause feature, separated from GameOver feature
+
+### Update 5:
+
+- Improved targeting of monsters
+- Reduced the max number of guns, for upcoming level up system
+- Slimes difficulty, change colour and health for now only based on player level tresholds
+- Added atk stat, investing into it higher the damage you deal.
+- Added agility stat, investing into it reduce the time between two bullet shooting.
+- Added vitality stat, investing into it reduce the time between two heals.
+- Smoothened gun rotation
+- Added level up system, and reduced number of max weapons you can have to match it
+- Added a boss
+
+#### Issue of music not playing on web version remained

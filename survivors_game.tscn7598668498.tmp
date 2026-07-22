@@ -1,0 +1,372 @@
+[gd_scene format=3 uid="uid://swcb8q32cvqi"]
+
+[ext_resource type="PackedScene" uid="uid://c1sx7bic4uhdj" path="res://player.tscn" id="1_3cish"]
+[ext_resource type="Script" uid="uid://c1bfau31nfqio" path="res://survivors_game.gd" id="1_qqaft"]
+[ext_resource type="AudioStream" uid="uid://b0m8yp6tc1snc" path="res://assets/House In a Forest Loop.ogg" id="2_qqaft"]
+[ext_resource type="PackedScene" uid="uid://dq3r015sr1uql" path="res://pine_tree.tscn" id="2_y3pti"]
+[ext_resource type="AudioStream" uid="uid://bqxvtkceieecj" path="res://assets/gameover.wav" id="3_7jj1j"]
+[ext_resource type="PackedScene" uid="uid://c4epiu5brqfek" path="res://level_up_card.tscn" id="6_edxvn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l26od"]
+bg_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqaft"]
+bg_color = Color(0, 0.89411765, 0.5568628, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Curve2D" id="Curve2D_l26od"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -82, -93, 0, 0, 0, 0, 2134.6245, -95.48566, 0, 0, 0, 0, 2131.7837, 1259.8085, 0, 0, 0, 0, -83.106125, 1262.7043, 0, 0, 0, 0, -82, -93)
+}
+point_count = 5
+
+[sub_resource type="InputEventAction" id="InputEventAction_edxvn"]
+action = &"ui_accept"
+
+[sub_resource type="Shortcut" id="Shortcut_7jj1j"]
+events = [SubResource("InputEventAction_edxvn")]
+
+[node name="Game" type="Node2D" unique_id=1307062922]
+y_sort_enabled = true
+script = ExtResource("1_qqaft")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=179047760]
+process_mode = 3
+stream = ExtResource("2_qqaft")
+autoplay = true
+parameters/looping = true
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1328294725]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("3_7jj1j")
+volume_db = 10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=393826373]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=866012259]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.9471994, 0.9471994, 0.9471994, 1)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=826242962]
+
+[node name="TimeLabel" type="Label" parent="HUD" unique_id=964586045]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.5
+offset_right = 61.5
+offset_bottom = 67.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "00:00"
+
+[node name="ExpBar" type="ProgressBar" parent="HUD" unique_id=733427274]
+unique_name_in_owner = true
+z_index = 10
+offset_left = 124.0
+offset_top = 23.0
+offset_right = 357.0
+offset_bottom = 50.0
+theme_override_styles/background = SubResource("StyleBoxFlat_l26od")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qqaft")
+show_percentage = false
+
+[node name="LvlLabel" type="Label" parent="HUD" unique_id=1125101198]
+unique_name_in_owner = true
+z_index = 10
+offset_left = 17.0
+offset_top = 13.0
+offset_right = 87.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+theme_override_font_sizes/font_size = 32
+text = "Lv. 1"
+
+[node name="KilledLabel" type="Label" parent="HUD" unique_id=1014824301]
+unique_name_in_owner = true
+z_index = 10
+offset_left = 17.0
+offset_top = 60.0
+offset_right = 266.0
+offset_bottom = 105.0
+theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+theme_override_font_sizes/font_size = 32
+text = "0 slime killed"
+
+[node name="AtkLabel" type="Label" parent="HUD" unique_id=1669581681]
+offset_left = 17.0
+offset_top = 105.0
+offset_right = 143.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 Atk"
+
+[node name="AgiLabel" type="Label" parent="HUD" unique_id=1129864566]
+offset_left = 17.0
+offset_top = 150.0
+offset_right = 143.0
+offset_bottom = 195.0
+theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 Agi"
+
+[node name="VitLabel" type="Label" parent="HUD" unique_id=960962599]
+offset_left = 17.0
+offset_top = 198.0
+offset_right = 143.0
+offset_bottom = 243.0
+theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 Vit"
+
+[node name="Timer" type="Timer" parent="HUD" unique_id=1822123409]
+autostart = true
+
+[node name="Player" parent="." unique_id=160481880 instance=ExtResource("1_3cish")]
+position = Vector2(963, 526)
+
+[node name="Path2D" type="Path2D" parent="Player" unique_id=1730399861]
+position = Vector2(-1075.237, -568.0828)
+scale = Vector2(1.0560344, 1.0359375)
+curve = SubResource("Curve2D_l26od")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D" unique_id=1352470037]
+unique_name_in_owner = true
+position = Vector2(-82, -93)
+rotation = -0.0011213698
+
+[node name="PineTree" parent="." unique_id=145447735 instance=ExtResource("2_y3pti")]
+position = Vector2(232, 218)
+
+[node name="PineTree2" parent="." unique_id=1236426618 instance=ExtResource("2_y3pti")]
+position = Vector2(435, 790)
+
+[node name="PineTree3" parent="." unique_id=1985654798 instance=ExtResource("2_y3pti")]
+position = Vector2(313, 248)
+
+[node name="PineTree4" parent="." unique_id=1328325339 instance=ExtResource("2_y3pti")]
+position = Vector2(1486, 166)
+
+[node name="PineTree5" parent="." unique_id=866328086 instance=ExtResource("2_y3pti")]
+position = Vector2(1696, 595)
+
+[node name="PineTree6" parent="." unique_id=1349019989 instance=ExtResource("2_y3pti")]
+position = Vector2(898, 899)
+
+[node name="PineTree7" parent="." unique_id=1526213400 instance=ExtResource("2_y3pti")]
+position = Vector2(761, 366)
+
+[node name="PineTree8" parent="." unique_id=931814114 instance=ExtResource("2_y3pti")]
+position = Vector2(1301, 957)
+
+[node name="PineTree10" parent="." unique_id=192915899 instance=ExtResource("2_y3pti")]
+position = Vector2(1385, 934)
+
+[node name="PineTree9" parent="." unique_id=916770647 instance=ExtResource("2_y3pti")]
+position = Vector2(1348, 996)
+
+[node name="MobSpawnTimer" type="Timer" parent="." unique_id=1994968480]
+wait_time = 0.3
+autostart = true
+
+[node name="GameOver" type="CanvasLayer" parent="." unique_id=677979946]
+unique_name_in_owner = true
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GameOver" unique_id=789706960]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5137255)
+
+[node name="Label" type="Label" parent="GameOver/ColorRect" unique_id=1975778409]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -11.5
+offset_right = 46.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 156
+text = "GAME OVER"
+uppercase = true
+
+[node name="Start" type="Button" parent="GameOver" unique_id=1378936092]
+unique_name_in_owner = true
+process_mode = 3
+anchors_preset = -1
+anchor_left = 0.46343154
+anchor_top = 1.7243806
+anchor_right = 0.8276723
+anchor_bottom = 1.8864177
+offset_left = -265.78857
+offset_top = -1123.3312
+offset_right = -265.78857
+offset_bottom = -1123.3312
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 120
+shortcut = SubResource("Shortcut_7jj1j")
+text = "Restart"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="GameOver" unique_id=2081056820]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -304.0
+offset_top = -152.0
+offset_right = 305.0
+offset_bottom = -113.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 28
+text = "You can press enter or start button to restart"
+
+[node name="Pause" type="CanvasLayer" parent="." unique_id=1078022363]
+unique_name_in_owner = true
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Pause" unique_id=768737895]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5137255)
+
+[node name="Label" type="Label" parent="Pause/ColorRect" unique_id=485952523]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -11.5
+offset_right = 46.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 156
+text = "PAUSE"
+uppercase = true
+
+[node name="Unpause" type="Button" parent="Pause" unique_id=638843148]
+process_mode = 3
+anchors_preset = -1
+anchor_left = 0.46343154
+anchor_top = 1.7243806
+anchor_right = 0.8276723
+anchor_bottom = 1.8864177
+offset_left = -265.78857
+offset_top = -1123.3312
+offset_right = -265.78857
+offset_bottom = -1123.3312
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 120
+shortcut = SubResource("Shortcut_7jj1j")
+text = "Continue"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Pause" unique_id=1595495630]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -304.0
+offset_top = -152.0
+offset_right = 305.0
+offset_bottom = -113.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 28
+text = "You can press enter or start button to continue"
+
+[node name="LevelUp" type="CanvasLayer" parent="." unique_id=335557350]
+unique_name_in_owner = true
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="LevelUp" unique_id=1290973993]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5137255)
+
+[node name="ColorRect2" type="ColorRect" parent="LevelUp" unique_id=372717527]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.5
+offset_top = -116.0
+offset_right = 111.5
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="LevelUp" unique_id=1337633970]
+offset_left = 890.0
+offset_top = 366.0
+offset_right = 1041.0
+offset_bottom = 411.0
+theme_override_font_sizes/font_size = 32
+text = "LEVEL UP!"
+
+[node name="LevelUpCard" parent="LevelUp" unique_id=1179941357 instance=ExtResource("6_edxvn")]
+top_level = true
+light_mask = 0
+visibility_layer = 524288
+position = Vector2(864, 424)
+
+[node name="StatPoints" type="Label" parent="LevelUp" unique_id=706958607]
+offset_left = 795.0
+offset_top = 681.0
+offset_right = 1139.0
+offset_bottom = 726.0
+theme_override_font_sizes/font_size = 32
+text = "Allocate your points: 0"
+
+[node name="ValidatePoints" type="Button" parent="LevelUp" unique_id=1188190645]
+process_mode = 3
+offset_left = 833.0
+offset_top = 739.0
+offset_right = 1090.0
+offset_bottom = 830.0
+theme_override_font_sizes/font_size = 60
+text = "Validate"
+
+[connection signal="timeout" from="HUD/Timer" to="." method="_on_timer_timeout"]
+[connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
+[connection signal="timeout" from="MobSpawnTimer" to="." method="_on_mob_spawn_timer_timeout"]
+[connection signal="pressed" from="GameOver/Start" to="." method="_on_start_pressed"]
+[connection signal="toggled" from="GameOver/Start" to="." method="_on_start_toggled"]
+[connection signal="pressed" from="Pause/Unpause" to="." method="_on_unpause_pressed"]
+[connection signal="pressed" from="LevelUp/ValidatePoints" to="LevelUp/LevelUpCard" method="_on_validate_points_pressed"]

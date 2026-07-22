@@ -1,16 +1,20 @@
 extends Node2D
 
 @onready var previous_position = $Player.position
-const MAX_TREE = 50
-var tree_count = 0
+var max_tree = 50
+var tree_count = 10
 var walk_distance = 0
 
 var max_mobs = 50
 var mob_count = 0
 var killed_count = 0
+var boss_spawn = false
 
-var lvl = 1
+var player_lvl = 1
 var xp = 0
+
+var minutes = 0
+var seconds = 0
 
 func _ready() -> void:
 	$Music.play()
@@ -22,7 +26,7 @@ func _physics_process(_delta: float) -> void:
 	if $Player.position != previous_position :
 		walk_distance += 1
 		previous_position = $Player.position
-	
+
 	if walk_distance == 10:
 		spawn_tree()
 		tree_count += 1
@@ -35,12 +39,17 @@ func _physics_process(_delta: float) -> void:
 			var current_tree = trees[tree]
 			if $Player.position.distance_to(previous_tree.position) < $Player.position.distance_to(current_tree.position):
 				previous_tree = current_tree
-		if trees and tree_count > MAX_TREE:
+		if trees and tree_count > max_tree:
 			previous_tree.queue_free()
 			tree_count -= 1
 
 func spawn_mob():
-	if mob_count >= max_mobs:
+	if player_lvl == 99:
+		max_mobs = 0
+		boss_spawn = true
+		$MobSpawnTimer.stop()
+		
+	if mob_count >= max_mobs and boss_spawn == false:
 		return
 	
 	var new_mob = preload("res://mob.tscn").instantiate()
@@ -57,14 +66,22 @@ func _on_mob_tree_exited():
 	xp += 5
 	var slime_or_slimes = "slime" if killed_count <= 1 else "slimes"
 	%KilledLabel.text = "%s %s killed" % [killed_count, slime_or_slimes]
-	if xp >= 100 and lvl < 99:
+	if xp >= 100 and player_lvl < 99:
 		xp = 0
-		lvl += 1
-		%LvlLabel.text = "Lv. %s" % lvl
-		$Player.level_up()
+		player_lvl += 1
+		%LvlLabel.text = "Lv. %s" % player_lvl
+		if player_lvl % 20 == 0 or player_lvl == 99:
+			$Player.level_up()
 		$MobSpawnTimer.wait_time *= 0.8
 		max_mobs += 1
+		%LevelUp.show()
+		get_tree().paused = true
 	%ExpBar.value = xp
+	
+	if boss_spawn == true and mob_count <= 0:
+		%GameOverLabel.text = "VICTORY"
+		%GameOver.show()
+		get_tree().paused = true
 
 func _on_mob_spawn_timer_timeout() -> void:
 	spawn_mob()
@@ -73,6 +90,7 @@ func _on_start_pressed() -> void:
 	restart()
 
 func _on_player_health_depleted() -> void:
+	%GameOverLabel.text = "GAME OVER"
 	%GameOver.show()
 	%DeathSound.play()
 	get_tree().paused = true
@@ -99,3 +117,19 @@ func unpause():
 
 func _on_unpause_pressed() -> void:
 	unpause()
+
+func _on_timer_timeout() -> void:
+	seconds += 1
+	time_label_update()
+
+func time_label_update() -> void:
+	if seconds == 60:
+		seconds -= 60
+		minutes += 1
+	%TimeLabel.text = "%s%s:%s%s" % [opt_zero(minutes), minutes, opt_zero(seconds), seconds]
+
+func opt_zero(unit) -> String:
+	if unit < 10:
+		return "0"
+	else:
+		return ""

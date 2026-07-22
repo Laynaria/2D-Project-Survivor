@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://c4epiu5brqfek"]
+
+[ext_resource type="Script" uid="uid://cj84k16gpp68y" path="res://level_up_card.gd" id="1_4nt2h"]
+
+[node name="LevelUpCard" type="Node2D" unique_id=1179941357]
+script = ExtResource("1_4nt2h")
+
+[node name="AtkLabel" type="Label" parent="." unique_id=901242052]
+unique_name_in_owner = true
+offset_left = 56.0
+offset_top = 16.0
+offset_right = 134.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+theme_override_font_sizes/font_size = 32
+text = "0 Atk"
+
+[node name="AgiLabel" type="Label" parent="." unique_id=1150397491]
+unique_name_in_owner = true
+offset_left = 56.0
+offset_top = 88.0
+offset_right = 130.0
+offset_bottom = 133.0
+theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+theme_override_font_sizes/font_size = 32
+text = "0 Agi"
+
+[node name="VitLabel" type="Label" parent="." unique_id=75053450]
+unique_name_in_owner = true
+offset_left = 56.0
+offset_top = 168.0
+offset_right = 124.0
+offset_bottom = 213.0
+theme_override_colors/font_color = Color(0.15294118, 0.16862746, 0.1882353, 1)
+theme_override_font_sizes/font_size = 32
+text = "0 Vit"
+
+[node name="AtkPlus" type="Button" parent="." unique_id=1233788492]
+process_mode = 3
+offset_left = 168.0
+offset_top = 8.0
+offset_right = 194.0
+offset_bottom = 61.0
+theme_override_font_sizes/font_size = 32
+text = "+"
+
+[node name="AtkMinus" type="Button" parent="." unique_id=2130248883]
+process_mode = 3
+offset_top = 8.0
+offset_right = 26.0
+offset_bottom = 61.0
+theme_override_font_sizes/font_size = 32
+text = "-"
+
+[node name="AgiPlus" type="Button" parent="." unique_id=1471194198]
+process_mode = 3
+offset_left = 168.0
+offset_top = 88.0
+offset_right = 194.0
+offset_bottom = 141.0
+theme_override_font_sizes/font_size = 32
+text = "+"
+
+[node name="AgiMinus" type="Button" parent="." unique_id=1594081541]
+process_mode = 3
+offset_top = 88.0
+offset_right = 26.0
+offset_bottom = 141.0
+theme_override_font_sizes/font_size = 32
+text = "-"
+
+[node name="VitPlus" type="Button" parent="." unique_id=1082117831]
+process_mode = 3
+offset_left = 168.0
+offset_top = 168.0
+offset_right = 194.0
+offset_bottom = 221.0
+theme_override_font_sizes/font_size = 32
+text = "+"
+
+[node name="VitMinus" type="Button" parent="." unique_id=548257061]
+process_mode = 3
+offset_top = 168.0
+offset_right = 26.0
+offset_bottom = 221.0
+theme_override_font_sizes/font_size = 32
+text = "-"
+
+[connection signal="pressed" from="AtkPlus" to="." method="_on_atk_plus_pressed"]
+[connection signal="pressed" from="AtkMinus" to="." method="_on_atk_minus_pressed"]
+[connection signal="pressed" from="AgiPlus" to="." method="_on_agi_plus_pressed"]
+[connection signal="pressed" from="AgiMinus" to="." method="_on_agi_minus_pressed"]
+[connection signal="pressed" from="VitPlus" to="." method="_on_vit_plus_pressed"]
+[connection signal="pressed" from="VitMinus" to="." method="_on_vit_minus_pressed"]

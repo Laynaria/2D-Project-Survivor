@@ -25,6 +25,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="Player" type="CharacterBody2D" unique_id=160481880]
+collision_mask = 5
 script = ExtResource("1_onrkg")
 
 [node name="HappyBoo" parent="." unique_id=1091727253 instance=ExtResource("1_4flbx")]
@@ -57,3 +58,9 @@ theme_override_styles/background = SubResource("StyleBoxFlat_hqtel")
 theme_override_styles/fill = SubResource("StyleBoxFlat_i3pqv")
 value = 100.0
 show_percentage = false
+
+[node name="Timer" type="Timer" parent="." unique_id=1273599600]
+unique_name_in_owner = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

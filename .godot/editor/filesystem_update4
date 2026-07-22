@@ -1,2 +1,10 @@
+res://level_up_card.tscn
+res://level_up_card.gd
 res://survivors_game.tscn
+res://player.gd
 res://survivors_game.gd
+res://mob.tscn
+res://mob.gd
+res://assets/characters/slime/slime.tscn
+res://pine_tree.tscn
+res://player.tscn
